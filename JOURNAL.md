@@ -14,3 +14,8 @@ Key Problems Solved:
 *   **Objective:** Translate functional requirements into a 3rd Normal Form database blueprint.
 *   **Design Decision:** Chose a Composite Primary Key configuration for the `Stock_Levels` bridge table using `(WarehouseID, ProductID)`. This avoids redundant rows and guarantees that a single warehouse cannot have duplicate rows for the same SKU, enforcing relational data integrity at the database engine layer.
 *   **Risk Mitigated:** By designing an immutable `Inventory_Logs` table, any stock anomalies can be fully auditable by tracking the exact user, time, and quantity changed, addressing the corporate goal of avoiding "phantom inventory".
+
+## Phase 3: Prototyping & Technical Implementation
+* **Objective:** Translate 3NF structural concepts into standardized, executable SQL schema matrices.
+* **Key Challenge Overcome:** Enforcing data constraints at the engine level rather than relying on application code. Implemented the `CHECK (Quantity >= 0)` constraint directly inside the `Stock_Levels` table definition. This strictly guarantees that software bugs cannot result in physically impossible negative stock balances, maintaining absolute ledger integrity.
+* **Testing Mechanics:** Configured repeatable seeding metrics detailing contrasting stock levels (normal vs. low-stock thresholds) across three regional fulfillment centers (Johannesburg, Pretoria, Durban) to verify alert criteria and role-based querying models dynamically.
